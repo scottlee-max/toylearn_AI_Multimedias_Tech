@@ -1,0 +1,94 @@
+{
+  "name": "01_Action_node_EditFields",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        -176
+      ],
+      "id": "1fc45b9e-76fc-4701-9119-56965f1d9bd7",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://zenquotes.io/api/random",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -448,
+        -176
+      ],
+      "id": "308dbd93-dbae-4d56-a82f-c803dee0dc60",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "93ba1a5b-be5a-4fda-a871-a3e28af5fa7c",
+              "name": "quote",
+              "value": "={{ $json.q }}",
+              "type": "string"
+            },
+            {
+              "id": "78329b5b-b1f0-46a6-8a41-5af0f56acb8a",
+              "name": "help",
+              "value": "={{ $json.h }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -240,
+        -176
+      ],
+      "id": "ee04b21c-f1f7-4cd0-b78a-361c66dd6fbd",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7536f521-265a-4314-a61c-794b5e2fda6b",
+  "meta": {
+    "instanceId": "168cb662c38efdc5d5b88deec799786d5e576bb80e409e36b06c523d57d14422"
+  },
+  "id": "2wF3zwEdgqGlQen2",
+  "tags": []
+}
