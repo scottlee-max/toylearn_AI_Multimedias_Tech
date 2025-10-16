@@ -1,0 +1,197 @@
+{
+  "name": "03_Action_nodes_rss.json",
+  "nodes": [
+    {
+      "parameters": {
+        "chatId": "5239997083",
+        "text": "=N8N에서 보냅니다.\nxml형식입니다.",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        32,
+        -224
+      ],
+      "id": "c0e21cfb-1d69-4e82-bd4f-102acbb915ad",
+      "name": "Send a text message",
+      "webhookId": "eaf337dd-b375-4ad9-b4f4-f0c8a80fb1f6",
+      "credentials": {
+        "telegramApi": {
+          "id": "sTlYEbAPdQJY3Bo2",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -576,
+        -240
+      ],
+      "id": "a7fb3e2e-f437-4990-805a-b29169673f3b",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "chatId": "5239997083",
+        "text": "=N8N에서 보냅니다.\n제목 : {{ $json.title }}\n발행일 : {{ $json.pubDate }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -256,
+        0
+      ],
+      "id": "4f58bbd2-ac4e-44dc-8636-87c5ee601d7d",
+      "name": "Send a text message1",
+      "webhookId": "eaf337dd-b375-4ad9-b4f4-f0c8a80fb1f6",
+      "credentials": {
+        "telegramApi": {
+          "id": "sTlYEbAPdQJY3Bo2",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://www.sportschosun.com/rss/index_all.htm",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -704,
+        16
+      ],
+      "id": "4c54dcf4-0893-4610-a79d-7afcaefb6e50",
+      "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "maxItems": 3,
+        "keep": "lastItems"
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        -240
+      ],
+      "id": "49c00863-eda7-4591-a09a-438a7a689cf7",
+      "name": "Limit1"
+    },
+    {
+      "parameters": {
+        "url": "https://www.yna.co.kr/rss/industry.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -352,
+        -256
+      ],
+      "id": "341f4aae-c6b4-4ea9-ad0b-61d75146c4cd",
+      "name": "RSS Read1"
+    },
+    {
+      "parameters": {
+        "maxItems": 3,
+        "keep": "lastItems"
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -496,
+        16
+      ],
+      "id": "3d0bb0aa-de4d-485d-8d28-0481d00fded8",
+      "name": "Limit"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "RSS Read1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read1": {
+      "main": [
+        [
+          {
+            "node": "Limit1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e401be3b-2235-4c1b-bb39-2c380d9f853b",
+  "meta": {
+    "instanceId": "168cb662c38efdc5d5b88deec799786d5e576bb80e409e36b06c523d57d14422"
+  },
+  "id": "nyN8FTkrzH0BTI74",
+  "tags": []
+}
