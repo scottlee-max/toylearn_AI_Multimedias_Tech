@@ -60,7 +60,7 @@
     },
     {
       "parameters": {
-        "maxItems": 2
+        "maxItems": 6
       },
       "type": "n8n-nodes-base.limit",
       "typeVersion": 1,
@@ -133,14 +133,13 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "models/gemini-2.5-flash",
-          "mode": "list",
-          "cachedResultName": "models/gemini-2.5-flash"
+          "value": "=models/gemini-2.5-flash",
+          "mode": "id"
         },
         "messages": {
           "values": [
             {
-              "content": "=당신은 정리의 신이야. \n\n기사 내용을 일부 간략화 해 줘.\n\n입력값 중 카테고리 필드의 값을 10자로 줄여 줘.\n\n나머지 필드는 그대로 유지해 줘.\n\n## 입력값\n\n\n\n{\n\"title\": {{ $json.Title }}\n\n\"link\": {{ $json.link }}\n\n\"pubDate\": {{ $json.pubDate }}\n\n\"categories\":{{ $json.categories[0] }} \n\n],\n\"isoDate\": \n\"2025-10-17T07:52:42.000Z\"\n}"
+              "content": "=당신은 정리의 신이야. \n\n기사 내용을 일부 간략화 해 줘.\n\n뉴스처럼 보여지게 해줘\n\n입력값 중 카테고리 필드의 값을 10자로 줄여 줘.\n\n나머지 필드는 그대로 유지해 줘.\n\n## 입력값\n\n\n\n{\n\"title\": {{ $json.Title }}\n\n\"link\": {{ $json.link }}\n\n\"pubDate\": {{ $json.pubDate }}\n\n\"categories\":{{ $json.categories[0] }} \n\n],\n\"isoDate\": \n\"2025-10-17T07:52:42.000Z\"\n}"
             }
           ]
         },
@@ -163,8 +162,8 @@
     },
     {
       "parameters": {
-        "chatId": "5239997083",
-        "text": "={{ $json.content }}",
+        "chatId": "=5239997083",
+        "text": "=타이틀: {{ $json.content.parts[0].text }}",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.telegram",
