@@ -1,6 +1,6 @@
 ## prompt
 
-
+```
 https://docs.google.com/document/d/1sNeN3GRr044wWSfXkF7h12mQ9arGzgoEdD_eUM8YLOU/edit?tab=t.0
 
 https://docs.google.com/document/d/1wWXJxOSIHSp9AsurrPVg-xY4z-3VQhSrKiCSeEfgAys/edit?tab=t.0
@@ -8,7 +8,8 @@ https://docs.google.com/document/d/1wWXJxOSIHSp9AsurrPVg-xY4z-3VQhSrKiCSeEfgAys/
 나는 20년차 기획프로젝트 책임자겸 영업지원 최고 결정권자야.
 
 위의 회의 녹취록을 참조해서 업무회의록 형식으로 각각 작성해줘.
-**회의록 양식**은 아래 출력형식 Markdown format 으로 출력. 반드시 MD파일형식으로 출력.
+**회의록 양식**은 아래 출력형식 Markdown format 으로 출력. 
+반드시 MD파일형식으로 출력.
 
 1. 주요요점과 결정사항 요약-이 회의에서 논의된 주요 사항, 내려진 핵심 결정사항, 그리고 합의된 행동 항목들을 요약해 주고 각 행동 항목에 대한 마감일과 책임자도 포함.
 
