@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "05_apis_weathermaps",
   "nodes": [
@@ -289,4 +290,297 @@
   },
   "id": "7jXsd4abEUoY5vgx",
   "tags": []
+=======
+{
+  "name": "05_apis_weathermaps",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://api.openweathermap.org/data/2.5/weather",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "lat",
+              "value": "44.34"
+            },
+            {
+              "name": "lon",
+              "value": "10.99"
+            },
+            {
+              "name": "appid",
+              "value": "240a45c828232c7c89213787817cf331"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -432,
+        -48
+      ],
+      "id": "b717b974-b314-4d92-84a8-6276c7360e85",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "formTitle": "도시 정보",
+        "formDescription": "입력한 도시 정보 입력",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "City Name"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -672,
+        -48
+      ],
+      "id": "d0fdeed3-f67d-4c97-b772-9096ac626ba3",
+      "name": "On form submission",
+      "webhookId": "290840a6-5cb3-479a-941e-366e7ef9106b"
+    },
+    {
+      "parameters": {
+        "url": "https://api.openweathermap.org/data/2.5/forecast",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "lat",
+              "value": "44.34"
+            },
+            {
+              "name": "lon",
+              "value": "10.99"
+            },
+            {
+              "name": "appid",
+              "value": "240a45c828232c7c89213787817cf331"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -192,
+        -48
+      ],
+      "id": "250f23fd-e48d-4bf6-a621-fc09778dd0eb",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d2676ee3-fb9f-439a-bd8a-37ca814abc0f",
+              "name": "City Name",
+              "value": "={{ $('On form submission').item.json['City Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "2d8a5cce-9983-4c38-82ed-67f3de1bc1af",
+              "name": "submittedAt",
+              "value": "={{ $('On form submission').item.json.submittedAt }}",
+              "type": "string"
+            },
+            {
+              "id": "1678dae1-434a-4f1f-88e4-1d339748f84a",
+              "name": "coord",
+              "value": "={{ $('HTTP Request').item.json.coord }}",
+              "type": "string"
+            },
+            {
+              "id": "de1d900e-cdb0-4bad-997f-904d2b4366d0",
+              "name": "city",
+              "value": "={{ $json.city }}",
+              "type": "string"
+            },
+            {
+              "id": "328d0520-15dd-447e-a065-7fae8c4007b8",
+              "name": "list",
+              "value": "={{ $json.list }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        16,
+        -48
+      ],
+      "id": "32736fb1-1f6f-4d54-9a9a-724de32a07ad",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1-wWb5K1QQ9VvPokoszvT56kibcMZNPf3jfempZb4rMc",
+          "mode": "list",
+          "cachedResultName": "05_apis",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-wWb5K1QQ9VvPokoszvT56kibcMZNPf3jfempZb4rMc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "시트1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-wWb5K1QQ9VvPokoszvT56kibcMZNPf3jfempZb4rMc/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "City Name": "={{ $json['City Name'] }}",
+            "confirmation Time": "={{ $json.submittedAt }}",
+            "coordinates": "={{ $json.coord }}",
+            "Current  Forecast": "={{ $json.city }}",
+            "Daily  Forecast": "={{ $json.list }}"
+          },
+          "matchingColumns": [
+            "City Name"
+          ],
+          "schema": [
+            {
+              "id": "City Name",
+              "displayName": "City Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "coordinates",
+              "displayName": "coordinates",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "confirmation Time",
+              "displayName": "confirmation Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Current  Forecast",
+              "displayName": "Current  Forecast",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Daily  Forecast",
+              "displayName": "Daily  Forecast",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        -48
+      ],
+      "id": "62783752-98b7-447d-9b2a-9445877b5e19",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "raET9D12Y9gEvLB9",
+          "name": "Google Sheets account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "65eb0eb1-7fdf-4d2f-b2f0-d2764938668f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9ce785761b4e818bb427f78610b7d73160eee24d142c9a20b60afbab015a048d"
+  },
+  "id": "7jXsd4abEUoY5vgx",
+  "tags": []
+>>>>>>> a5c52f5037d5d76c76f0d3214ac21cb3ac78385a
 }
